@@ -1,0 +1,6 @@
+title: cameras.casa infrastructure guide
+description: Building a segmented MikroTik edge for a self-hosted camera VPN, from scratch
+theme: jekyll-theme-primer
+markdown: kramdown
+kramdown:
+  input: GFM
