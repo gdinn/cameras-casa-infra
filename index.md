@@ -1052,7 +1052,7 @@ sudo ufw logging low
 | `deny incoming` | Anything not listed in Step 24 is dropped (silently, so a scan sees a timeout and not a refusal). This also covers the MediaMTX ports that must stay local: RTSP server (8554), API (9997), metrics (9998) |
 | `allow outgoing` | The Pi starts its own connections: RTSP to the cameras, package updates over IPv4, DNS and NTP to the router. What it may reach is already limited by the router (Steps 11 and 18) |
 | `deny routed` | The Pi does not forward traffic between interfaces. If IP forwarding were ever enabled by mistake, it still could not act as a bridge between the DMZ and anything else |
-| `logging low` | Blocked packets are logged with rate limiting (`journalctl -k \| grep 'UFW BLOCK'`) |
+| `logging low` | Blocked packets are logged with rate limiting (`journalctl -k | grep 'UFW BLOCK'`) |
 
 ufw is installed **inactive**, so nothing is enforced yet.
 
@@ -1404,7 +1404,7 @@ PersistentKeepalive = 25
 | `curl -6 https://ipv6.icanhazip.com` | ❌ | ✅ the router's ether1 address (NAT66) |
 | Ping another peer's `fd00:10::` address | ❌ | ❌ |
 | On the Pi: `echo $SSH_CLIENT` in a new SSH session | — | the peer's real `fd00:10::` address (no NAT) |
-| On the Pi: `sudo journalctl -k --since "-10 min" \| grep 'UFW BLOCK'` after the client tests | — | nothing from the client: the router dropped it first |
+| On the Pi: `sudo journalctl -k --since "-10 min" | grep 'UFW BLOCK'` after the client tests | — | nothing from the client: the router dropped it first |
 | Large Samba copy through the tunnel | — | ✅ no stalls (MSS clamp, Step 19) |
 
 Also run these from inside the home (computer on HOME with the VPN up): the tunnel must work there too, since HOME has IPv6 via NAT66 and the endpoint is AAAA-only.
